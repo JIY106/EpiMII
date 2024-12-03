@@ -1,0 +1,45 @@
+1786762
+Best Template: 6dig
+Best Similarity: 25.00%
+83269
+Best Template: 4p57
+Best Similarity: 29.55%
+83451
+Best Template: 6hby
+Best Similarity: 25.00%
+83582
+Best Template: 4ov5
+Best Similarity: 25.00%
+83675
+Best Template: 1uvq
+Best Similarity: 29.55%
+1786762
+Best Template: 6dig
+Best Similarity: 25.00%
+83269
+Best Template: 4p57
+Best Similarity: 29.55%
+83451
+Best Template: 6hby
+Best Similarity: 25.00%
+83582
+Best Template: 4ov5
+Best Similarity: 25.00%
+83675
+Best Template: 1uvq
+Best Similarity: 29.55%
+1786762
+Best Template: 6dig
+Best Similarity: 25.00%
+83269
+Best Template: 4p57
+Best Similarity: 29.55%
+83451
+Best Template: 6hby
+Best Similarity: 25.00%
+83582
+Best Template: 4ov5
+Best Similarity: 25.00%
+83675
+Best Template: 1uvq
+Best Similarity: 29.55%
