@@ -12,8 +12,34 @@
    conda env create -f epim2.yml
    conda activate epim2
    ```
-2. Open 'Run_JY_try_epitope.ipynb' in _testing_ folder in <ins>Jupyterlab </ins> or <ins>Jupyter notebook </ins>.
-3. 
+2. Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions)
+   Open cmd or MODELLER.exe and go to the _Modeller_ folder.
+   ```
+   cd ./dataset/Modeller
+   ```
+   Unzip templates that will be used in MODELLER.
+   ```
+   tar zxf ./templates.tar.gz .
+4. Open 'Run_JY_try_epitope.ipynb' in _testing_ folder in <ins>Jupyterlab </ins> or <ins>Jupyter notebook </ins>.
+5. To test the code, use the sample data 1hxy.pdb, 2nna.pdb, 4p57.pdb, 4y19.pdb. Make sure to open the pdb files to check the Chain ID. Run all lines in this .ipynb file, and then the redesigned epitope sequences with their sequence recoveries will be output.
+   ```
+   'designed_chain = "B" #change B with the correct Chain ID.
+   ```
+6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
+   * **Approach one**: Input the Modeller-modeled 3D structure of the neoantigen (pdb input).
+     Run Fast2Pir.sh to generate .ali files for all FASTA files. The output .ali files will be stored in the _ali_ folder.
+      ```
+      ./FAST2Pir.sh
+      ```
+      Run Buildmodel2.py to start modeling. Then, you will get the Modelled .pdb files in the current folder with temporary files.
+      ```
+      python Buildmodel2.py
+      ```
+   * **Approach two**: Input the best template's 3D structure and the neoantigen sequence (pdb input + FASTA input).
+     Run CalculateSimilarityAndSave.py and get output1.txt, which contains the epitope name, the best template, and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitope sequence.
+      ```
+      python CalculateSimilarityAndSave.py
+      ```
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
 2. Modeling 3D structures of epitope sequences using MODELLER:
@@ -40,7 +66,7 @@
       ```
       * **Approach two:** Calculating sequence similarity and structure modeling.
      
-      Run CalculateSimilarityAndSave.py and get output1.txt that contains the epitiopes' name, best template and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitoipe sequence.
+      Run CalculateSimilarityAndSave.py and get output1.txt that contains the epitopes name, best template, and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitope sequence.
       ```
       python CalculateSimilarityAndSave.py
       ```
