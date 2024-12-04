@@ -1,6 +1,11 @@
 # EpiMII: An Advanced GNN Model for Re/Co-designing MHC-II Epitopes and Neoantigens 
 ## Overview:
 
+<p align="center">
+<img width="1000" src="https://github.com/JIY106/EpiMII/blob/main/figures/Figure%204.png">
+</p>
+
+
 ## Quick guide
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
