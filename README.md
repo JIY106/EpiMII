@@ -1,10 +1,9 @@
 # EpiMII: An Advanced GNN Model for Re/Co-designing MHC-II Epitopes and Neoantigens 
-## Overview:
 
 <p align="center">
 <img width="1000" src="https://github.com/JIY106/EpiMII/blob/main/figures/Figure%204.png">
 </p>
-
+This is a repo of EpiMII. Please read EpiMII [paper](url).
 
 ## Quick guide
 1. Set up conda environment:
@@ -12,7 +11,7 @@
    conda env create -f epim2.yml
    conda activate epim2
    ```
-2. Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions)
+2. Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions.)
    Open cmd or MODELLER.exe and go to the _Modeller_ folder.
    ```
    cd ./dataset/Modeller
@@ -27,7 +26,7 @@
    'designed_chain = "B"      #change B with the correct Chain ID.
    ```
 6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
-   * <ins>Input: Modeller-modeled 3D structure of the neoantigen (.pdb file)</ins>
+   * <ins>Input: MODELLER-modeled 3D structure of the neoantigen (.pdb file)</ins>
    
      1) Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
       ```
@@ -41,14 +40,52 @@
       ```
       pdb = 'xxxx'      #make sure to change this to your modeled neoantigen name
       pdb_path = 'your_pdb_path/xxxx.pdb'      #make sure to change this to your modeled neoantigen name
-      designed_chain = 'A'      #the chain ID for all Modeller-modeled epitope is A.
+      designed_chain = 'A'      #the chain ID for all MODELLER-modeled epitopes is A.
       ```
+7. Mask strategy:
+   1) Open 1bx2_mhcii.pdb in [Pymol]([url](https://www.pymol.org/)) and open the 3D structure of the modeled neoantigen (input pdb file).
+      ```
+      copy chain C of 1bx2_mhcii as a new object (1bx2 epitope). Show sticks and hide cartoons of both 1bx2 epitope and modeled neoantigen.
+      > Because MODELLER uses 3D templates to model neoantigens, the modeled neoantigens have already aligned with templates.
+   2) Find the correct position using 1bx2-DRB1 complex as reference:
+![image](https://github.com/user-attachments/assets/e9964828-e7ee-4914-9059-0bb1bf882423)
+
+
+
+## Example output:
+```
+>83269, score=0.5653, global_score=0.5653, fixed_chains=[], designed_chains=['A'], model_name=128_earlystop, seed=37
+HVFEENLIGLIGRGG
+> T=0.1, sample=1, score=0.3561, global_score=0.3561, seq_recovery=0.9333
+HVFEENLIGLIGFGG
+>T=0.1, sample=2, score=0.3412, global_score=0.3412, seq_recovery=0.8667
+YVFEENLIGLIGFGG
+>T=0.1, sample=3, score=0.3966, global_score=0.3966, seq_recovery=0.8667
+HVFEEELIGLIGFGG
+>T=0.1, sample=4, score=0.3463, global_score=0.3463, seq_recovery=0.8667
+YVFEENLIGLIGFGG
+>T=0.1, sample=5, score=0.3783, global_score=0.3783, seq_recovery=0.8000
+YVFVENLIGLIGFGG
+>T=0.1, sample=6, score=0.3573, global_score=0.3573, seq_recovery=0.8667
+HVFWENLIGLIGFGG
+>T=0.1, sample=7, score=0.3822, global_score=0.3822, seq_recovery=0.8667
+HVFEEELIGLIGFGG
+>T=0.1, sample=8, score=0.3223, global_score=0.3223, seq_recovery=0.9333
+HVFEENLIGLIGFGG
+ ```
+* T: Sample temperature. Here, we use 0.1 as the default.
+* score: Average of the negative log probabilities of all designed residues.
+* global_score: Average of the negative log probabilities of both masked and designed residues.
+* designed_chains: Chain ID of the input pdb file.
+  > Because epitope or neoantigen have only one chain, which is the designed chain, the 'fixed_chains' is empty.
+* seq_recovery: Sequence recovery measures the percentage of amino acids in the designed sequence that match the amino acids in the native sequence for a given protein backbone structure.
+  > It measures how well the designed sequence matches the input sequence for a given protein structure.
+* seed: random seed.
+  > Different random seeds will cause 0.01-0.02 variation in the output score and global_score for the same output sequence but will not impact the seq_recovery.
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
 2. Modeling 3D structures of epitope sequences using MODELLER:
-   1) Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions)
-
-      Open cmd or MODELLER.exe and go to the _Modeller_ folder.
+   1) Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license.(MODELLER is available free of charge to academic non-profit institutions)Open cmd or MODELLER.exe and go to the _Modeller_ folder.
       ```
       cd ./dataset/Modeller
       ```
@@ -56,7 +93,7 @@
       ```
       tar zxf ./templates.tar.gz .
       ```
-   2) Two approaches to modeling epitopes' 3D structures:
+   3) Two approaches to modeling epitopes' 3D structures:
       * **Approach one:** Structure modeling only without calculating sequence similarity.
         
       Run Fast2Pir.sh to generate .ali files for all FASTA files. The output .ali files will be stored in the _ali_ folder.
