@@ -28,6 +28,7 @@
    ```
 6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
    * <ins>Input the Modeller-modeled 3D structure of the neoantigen (pdb input).</ins>
+   
      Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
       ```
       ./FAST2Pir.sh
