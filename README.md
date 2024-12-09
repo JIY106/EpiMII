@@ -2,7 +2,7 @@
 ## Overview:
 
 <p align="center">
-<img width="100" src="https://github.com/JIY106/EpiMII/blob/main/figures/Figure%204.png">
+<img width="1000" src="https://github.com/JIY106/EpiMII/blob/main/figures/Figure%204.png">
 </p>
 
 
@@ -24,24 +24,24 @@
 4. Please check the model_name is '128_earlystop'.
 5. To test the code, use the sample data 1hxy.pdb, 2nna.pdb, 4p57.pdb, 4y19.pdb. Make sure to open the pdb files and check the Chain ID. Run all lines in this .ipynb file, and then the redesigned epitope sequences with their sequence recoveries will be output.
    ```
-   'designed_chain = "B" #change B with the correct Chain ID.
+   'designed_chain = "B"      #change B with the correct Chain ID.
    ```
 6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
-   * <ins>Input the Modeller-modeled 3D structure of the neoantigen (pdb input).</ins>
+   * <ins>Input: Modeller-modeled 3D structure of the neoantigen (.pdb file)</ins>
    
-     Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
+     1) Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
       ```
       ./FAST2Pir.sh
       ```
-      Run Buildmodel2.py to start modeling. Then, you will get the Modeled .pdb files in the current folder with temporary files.
+     2) Run Buildmodel2.py to start modeling. Then, you will get the modeled .pdb files in the current folder with temporary files.
       ```
       python Buildmodel2.py
       ```
-      Run Run_JY_try_epitope.ipynb in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
+     3) Run Run_JY_try_epitope.ipynb in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
       ```
-      pdb = 'xxxx' #make sure to change this to your modeled neoantigen name
-      pdb_path = 'your_pdb_path/xxxx.pdb' #make sure to change this to your modeled neoantigen name
-      designed_chain = 'A' # The chain ID for all Modeller-modeled epitope is A.
+      pdb = 'xxxx'      #make sure to change this to your modeled neoantigen name
+      pdb_path = 'your_pdb_path/xxxx.pdb'      #make sure to change this to your modeled neoantigen name
+      designed_chain = 'A'      #the chain ID for all Modeller-modeled epitope is A.
       ```
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
