@@ -20,25 +20,27 @@
    Unzip templates that will be used in MODELLER.
    ```
    tar zxf ./templates.tar.gz .
-4. Open 'Run_JY_try_epitope.ipynb' in _testing_ folder in <ins>Jupyterlab </ins> or <ins>Jupyter notebook </ins>.
-5. To test the code, use the sample data 1hxy.pdb, 2nna.pdb, 4p57.pdb, 4y19.pdb. Make sure to open the pdb files to check the Chain ID. Run all lines in this .ipynb file, and then the redesigned epitope sequences with their sequence recoveries will be output.
+3. Open 'Run_JY_try_epitope.ipynb' in _testing_ folder in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
+4. Please check the model_name is '128_earlystop'.
+5. To test the code, use the sample data 1hxy.pdb, 2nna.pdb, 4p57.pdb, 4y19.pdb. Make sure to open the pdb files and check the Chain ID. Run all lines in this .ipynb file, and then the redesigned epitope sequences with their sequence recoveries will be output.
    ```
    'designed_chain = "B" #change B with the correct Chain ID.
    ```
 6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
-   * **Approach one**: Input the Modeller-modeled 3D structure of the neoantigen (pdb input).
-     Run Fast2Pir.sh to generate .ali files for all FASTA files. The output .ali files will be stored in the _ali_ folder.
+   * <ins>Input the Modeller-modeled 3D structure of the neoantigen (pdb input).</ins>
+     Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
       ```
       ./FAST2Pir.sh
       ```
-      Run Buildmodel2.py to start modeling. Then, you will get the Modelled .pdb files in the current folder with temporary files.
+      Run Buildmodel2.py to start modeling. Then, you will get the Modeled .pdb files in the current folder with temporary files.
       ```
       python Buildmodel2.py
       ```
-   * **Approach two**: Input the best template's 3D structure and the neoantigen sequence (pdb input + FASTA input).
-     Run CalculateSimilarityAndSave.py and get output1.txt, which contains the epitope name, the best template, and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitope sequence.
+      Run Run_JY_try_epitope.ipynb in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
       ```
-      python CalculateSimilarityAndSave.py
+      pdb = 'xxxx' #make sure to change this to your modeled neoantigen name
+      pdb_path = 'your_pdb_path/xxxx.pdb' #make sure to change this to your modeled neoantigen name
+      designed_chain = 'A' # The chain ID for all Modeller-modeled epitope is A.
       ```
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
@@ -60,7 +62,7 @@
       ```
       ./FAST2Pir.sh
       ```
-      Run Buildmodel2.py to start modeling. Then, you will get the Modelled .pdb files in the current folder with temporary files.
+      Run Buildmodel2.py to start modeling. Then, you will get the Modeled .pdb files in the current folder with temporary files.
       ```
       python Buildmodel2.py
       ```
@@ -86,7 +88,7 @@
    ./multiple_convert_cif_to_pt.sh
    ```
 ## Available sources:
-* The dataset (pt files) used in EpiMII paper can be downloaded from []. If you would like to retrain the model, please put all pt files in this directory _./training/training_data/pdb/pt_.
+* The dataset (pt files) used in EpiMII paper can be downloaded from []. If you want to retrain the model, please put all pt files in this directory _./training/training_data/pdb/pt_.
 * The MODELLER-modeled 3D structures of 142934 MHC-II epitopes (pdb files) used in EpiMII paper can be downloaded from [].
 * All model weights can be downloaded from []. In the EpiMII paper, 'epoch50_step47050.pt' are used as the final model weight '128_earlystop.pt'.
 * 133 3D structures obtained by X-ray crystalography of MHC-II epitopes collected from PDB can be found in the directory _./dataset/3D_crystalized_all.tar.gz_.
