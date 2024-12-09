@@ -11,7 +11,7 @@ This is a repo of EpiMII. Please read EpiMII [paper](url).
    conda env create -f epim2.yml
    conda activate epim2
    ```
-2. Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions.)
+2. Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license. (MODELLER is available free of charge to academic non-profit institutions.)\
    Open cmd or MODELLER.exe and go to the _Modeller_ folder.
    ```
    cd ./dataset/Modeller
@@ -25,32 +25,36 @@ This is a repo of EpiMII. Please read EpiMII [paper](url).
    ```
    'designed_chain = "B"      #change B with the correct Chain ID.
    ```
-6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.)
-   * <ins>Input: MODELLER-modeled 3D structure of the neoantigen (.pdb file)</ins>
-   
-     1) Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
-      ```
-      ./FAST2Pir.sh
-      ```
-     2) Run Buildmodel2.py to start modeling. Then, you will get the modeled .pdb files in the current folder with temporary files.
-      ```
-      python Buildmodel2.py
-      ```
-     3) Run Run_JY_try_epitope.ipynb in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
-      ```
-      pdb = 'xxxx'      #make sure to change this to your modeled neoantigen name
-      pdb_path = 'your_pdb_path/xxxx.pdb'      #make sure to change this to your modeled neoantigen name
-      designed_chain = 'A'      #the chain ID for all MODELLER-modeled epitopes is A.
-      ```
+6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.) \
+   Input: MODELLER-modeled 3D structure of the neoantigen (.pdb file). 
+   * Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
+   ```
+   ./FAST2Pir.sh
+   ```
+   * Run Buildmodel2.py to start modeling. Then, you will get the modeled .pdb files in the current folder with temporary files.
+   ```
+   python Buildmodel2.py
+   ```
+   * Run Run_JY_try_epitope.ipynb in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
+   ```
+   pdb = 'xxxx'      #make sure to change this to your modeled neoantigen name
+   pdb_path = 'your_pdb_path/xxxx.pdb'      #make sure to change this to your modeled neoantigen name
+   designed_chain = 'A'      #the chain ID for all MODELLER-modeled epitopes is A.
+   ```
 7. Mask strategy:
-   1) Open 1bx2_mhcii.pdb in [Pymol]([url](https://www.pymol.org/)) and open the 3D structure of the modeled neoantigen (input pdb file).
-      ```
-      copy chain C of 1bx2_mhcii as a new object (1bx2 epitope). Show sticks and hide cartoons of both 1bx2 epitope and modeled neoantigen.
+   * Open 1bx2_mhcii.pdb in [Pymol](https://www.pymol.org/) and open the 3D structure of the modeled neoantigen (input pdb file).\
+     Copy chain C of 1bx2_mhcii as a new object (1bx2 epitope). Show sticks and hide cartoons of both 1bx2 epitope and modeled neoantigen.
       > Because MODELLER uses 3D templates to model neoantigens, the modeled neoantigens have already aligned with templates.
-   2) Find the correct position using 1bx2-DRB1 complex as reference:
-![image](https://github.com/user-attachments/assets/e9964828-e7ee-4914-9059-0bb1bf882423)
-
-
+   * Find the correct position using [1bx2-mhcii complex](https://www.rcsb.org/structure/1bx2) as reference (use 83269.pdb as example).
+   ![image](https://github.com/user-attachments/assets/e9964828-e7ee-4914-9059-0bb1bf882423)
+   <p align="center">
+   <img width="500" src="https://github.com/JIY106/EpiMII/blob/main/figures/Position_example.png">
+   </p>
+   
+   * In Run_JY_try_epitope.ipynb, input the masked residues. The first residue index in the pdb file is 1.
+   ```
+   fixed_positions_dict ={'83269':{'A': [3,4,9,10,11]}}      #Here mask positions are: 2,3,8,9,10, but input the corresponding residue indexes in pdb file.
+   ```
 
 ## Example output:
 ```
@@ -77,45 +81,46 @@ HVFEENLIGLIGFGG
 * score: Average of the negative log probabilities of all designed residues.
 * global_score: Average of the negative log probabilities of both masked and designed residues.
 * designed_chains: Chain ID of the input pdb file.
-  > Because epitope or neoantigen have only one chain, which is the designed chain, the 'fixed_chains' is empty.
+   > Because epitope or neoantigen have only one chain, which is the designed chain, the 'fixed_chains' is empty.
 * seq_recovery: Sequence recovery measures the percentage of amino acids in the designed sequence that match the amino acids in the native sequence for a given protein backbone structure.
-  > It measures how well the designed sequence matches the input sequence for a given protein structure.
+   > It measures how well the designed sequence matches the input sequence for a given protein structure.
 * seed: random seed.
-  > Different random seeds will cause 0.01-0.02 variation in the output score and global_score for the same output sequence but will not impact the seq_recovery.
+   > Different random seeds will cause 0.01-0.02 variation in the output score and global_score for the same output sequence but will not impact the seq_recovery.
+
 ## Training Data Preparation:
 1. Collect epitope sequences and save them as multiple FASTA files. One epitope sequence is in one FASTA, like './dataset/Modeller/fasta/86269.fasta'.
 2. Modeling 3D structures of epitope sequences using MODELLER:
-   1) Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license.(MODELLER is available free of charge to academic non-profit institutions)Open cmd or MODELLER.exe and go to the _Modeller_ folder.
-      ```
-      cd ./dataset/Modeller
-      ```
-      Unzip templates that will be used in MODELLER.
-      ```
-      tar zxf ./templates.tar.gz .
-      ```
-   3) Two approaches to modeling epitopes' 3D structures:
-      * **Approach one:** Structure modeling only without calculating sequence similarity.
-        
-      Run Fast2Pir.sh to generate .ali files for all FASTA files. The output .ali files will be stored in the _ali_ folder.
+   + Download MODELLER from [https://salilab.org/modeller/download_installation.html] and register for a license.(MODELLER is available free of charge to academic non-profit institutions) \
+     Open cmd or MODELLER.exe and go to the _Modeller_ folder.
+     ```
+     cd ./dataset/Modeller
+     ```
+     Unzip templates that will be used in MODELLER.
+     ```
+     tar zxf ./templates.tar.gz .
+     ```
+   + Two approaches to modeling epitopes' 3D structures: 
+     
+   **Approach one:** Structure modeling only without calculating sequence similarity.
+      - Run Fast2Pir.sh to generate .ali files for all FASTA files. The output .ali files will be stored in the _ali_ folder.
       ```
       ./FAST2Pir.sh
       ```
-      Run Buildmodel2.py to start modeling. Then, you will get the Modeled .pdb files in the current folder with temporary files.
+
+      - Run Buildmodel2.py to start modeling. Then, you will get the Modeled .pdb files in the current folder with temporary files.
       ```
       python Buildmodel2.py
       ```
-      * **Approach two:** Calculating sequence similarity and structure modeling.
-     
-      Run CalculateSimilarityAndSave.py and get output1.txt that contains the epitopes name, best template, and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitope sequence.
-      ```
-      python CalculateSimilarityAndSave.py
-      ```
-      Run Data-clean.ipynb in <ins>Jupyterlab </ins> or <ins>Jupyter notebook </ins> to get haha.txt. The final output will be .ali files in _ali1_ folder and combined_output1.txt which contains epitopes' name, epitopes' sequence, best template, and sequence similarity.
-      
-      Run Build-model3.py to construct the 3D structures of epitopes using their best template. The output pdb files will be stored in _output_pdb_ folder. All temporpary files will be automatically deleted as shown in the script.
+   **Approach two:** Calculating sequence similarity and structure modeling.
+      - Run CalculateSimilarityAndSave.py and get output1.txt that contains the epitopes name, best template, and the sequence similarity. The best template here means the template has the highest sequence similarity with the epitope sequence.
+        ```
+        python CalculateSimilarityAndSave.py
+        ```
+      - Run Data-clean.ipynb in <ins>Jupyterlab </ins> or <ins>Jupyter notebook </ins> to get haha.txt. The final output will be .ali files in _ali1_ folder and combined_output1.txt which contains epitopes' name, epitopes' sequence, best template, and sequence similarity.
+      - Run Build-model3.py to construct the 3D structures of epitopes using their best template. The output pdb files will be stored in _output_pdb_ folder. All temporpary files will be automatically deleted as shown in the script.
 3. Convert pdb files to mmcif files.
-   1) Download MAXIT Suite from [https://sw-tools.rcsb.org/apps/MAXIT/index.html] to your Linux/Unix environment or WSL. Then, follow the README file inside maxit folder to install MAXIT.
-   2) Go to _script_ folder and run multiple_mmcif.sh to convert multiple pdb files to mmcif files. The output cif files will be stored in _../mmcif_ folder.
+   + Download MAXIT Suite from [https://sw-tools.rcsb.org/apps/MAXIT/index.html] to your Linux/Unix environment or WSL. Then, follow the README file inside maxit folder to install MAXIT.
+   + Go to _script_ folder and run multiple_mmcif.sh to convert multiple pdb files to mmcif files. The output cif files will be stored in _../mmcif_ folder.
       ```
       cd ..
       cd scripts
