@@ -42,7 +42,7 @@ This is a repo of EpiMII. Please read EpiMII [paper](url).
    designed_chain = 'A'      #the chain ID for all MODELLER-modeled epitopes is A.
    ```
 7. Mask strategy:
-   * Open 1bx2_mhcii.pdb in [Pymol](https://www.pymol.org/) and open the 3D structure of the modeled neoantigen (input pdb file).\
+   * Open 1bx2_mhcii.pdb in [PyMOL](https://www.pymol.org/) and open the 3D structure of the modeled neoantigen (input pdb file).\
      Copy chain C of 1bx2_mhcii as a new object (1bx2 epitope). Show sticks and hide cartoons of both 1bx2 epitope and modeled neoantigen.
       > Because MODELLER uses 3D templates to model neoantigens, the modeled neoantigens have already aligned with templates.
    * Find the correct position using [1bx2-mhcii complex](https://www.rcsb.org/structure/1bx2) as reference (use 83269.pdb as an example).
