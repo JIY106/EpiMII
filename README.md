@@ -131,6 +131,20 @@ HVFEENLIGLIGFGG
    ```
    ./multiple_convert_cif_to_pt.sh
    ```
+5. Generate the _training_data_ folder
+   * Run _./dataset/scripts/Generate_list_csv.ipynb_ to create csv file using combined_output.txt and epitope list exported from [IEDB](https://www.iedb.org/).
+   * Run _./dataset/scripts/Split.ipynb_ to create cluster.txt and split the dataset. Here, one cluster contains one epitope.
+   ```
+   > training data
+      > list_142934.csv
+      > test.txt
+      > validation.txt
+      > pdb
+         > pt
+            > xxx.pt
+            > xxx_A.pt
+            ...
+   ```
 ## Model evaluation:
 1. Run Test_multiple_pdbs_seq_rec.ipynb in _testing_ folder and use the pdb folder _sample_data_ to test model performance. (You can change it to your own test set.)
 2. Each epitope will generate four redesigned epitope sequences and four sequence recoveries.
