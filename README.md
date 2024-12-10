@@ -135,7 +135,7 @@ HVFEENLIGLIGFGG
    * Run _./dataset/scripts/Generate_list_csv.ipynb_ to create csv file using combined_output.txt and epitope list exported from [IEDB](https://www.iedb.org/).
    * Run _./dataset/scripts/Split.ipynb_ to create cluster.txt and split the dataset. Here, one cluster contains one epitope.
    ```
-   > training data
+   > training_data
       > list_142934.csv
       > test.txt
       > validation.txt
