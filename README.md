@@ -12,7 +12,7 @@ This is a repo of EpiMII. Please read EpiMII [paper](url).
    conda activate epim2
    python -m ipykernel install --user --name=epim2 --display-name "epim2"
    ```
-2. [MODELLER](https://salilab.org/modeller/download_installation.html), register for a license. (MODELLER is available free of charge to academic non-profit institutions.)\
+2. Download [MODELLER](https://salilab.org/modeller/download_installation.html), register for a license. (MODELLER is available free of charge to academic non-profit institutions.)
 
    ```
    cd ./dataset/Modeller
@@ -23,11 +23,11 @@ This is a repo of EpiMII. Please read EpiMII [paper](url).
    ```
 3. Open 'Run_JY_try_epitope.ipynb' in _testing_ folder in <ins>JupyterLab </ins> or <ins>Jupyter notebook </ins>.
 4. Please check the model_name is '128_earlystop'.
-5. To test the code, use pdb files in _sample_data_ folder. Make sure to open the pdb files and check the Chain ID. Run all lines in this .ipynb file, then redesigned epitope sequences with their sequence recoveries will be output.
+5. To test the code, use pdb files in _sample_data_ folder. Make sure to open the pdb files and check the Chain ID. Run all lines in this .ipynb file, then designed epitope sequences with their sequence recoveries will be output.
    ```
    'designed_chain = "B"      #change B with the correct Chain ID.
    ```
-6. Example of redesigning epitope or neoantigen: (here, use a neoantigen as an example.) \
+6. Example of designing epitope or neoantigen: (here, use a neoantigen as an example.) \
    Input: MODELLER-modeled 3D structure of the neoantigen (.pdb file). 
    * Prepare the FASTA file of the neoantigen. Run Fast2Pir.sh to generate a .ali file for the FASTA file. The output .ali file will be stored in the _ali_ folder.
    ```
@@ -149,7 +149,7 @@ HVFEENLIGLIGFGG
    ```
 ## Model evaluation:
 1. Run Test_multiple_pdbs_seq_rec.ipynb in _testing_ folder and use the pdb folder _sample_data_ to test model performance. (You can change it to your own test set.)
-2. Each epitope will generate four redesigned epitope sequences and four sequence recoveries.
+2. Each epitope will generate four designed epitope sequences and four sequence recoveries.
 3. Average sequence recovery will be calculated and plotted, as shown in _example_output_ folder.
 ## Available sources:
 * The dataset (pt files) used in EpiMII paper can be downloaded from []. If you want to retrain the model, please put all pt files in this directory _./training/training_data/pdb/pt_.
