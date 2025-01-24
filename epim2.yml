@@ -1,0 +1,18 @@
+name: epim2
+channels:
+  - defaults
+  - salilab
+dependencies:
+  - python=3.12
+  - matplotlib
+  - modeller
+  - pip
+  - pip: 
+    - numpy
+    - pandas
+    - torch
+    - peptides
+    - scikit-learn
+    - tqdm
+    - ipykernel
+    - nbformat
