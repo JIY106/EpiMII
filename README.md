@@ -1,7 +1,7 @@
 # EpiMII: An Advanced GNN Model for Re/Co-designing MHC-II Epitopes and Neoantigens 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JIY106/EpiMII/main/figures/Fig4.tig" width="1000" alt="Fig4">
+  <img src="https://raw.githubusercontent.com/JIY106/EpiMII/main/figures/Fig4.tif" width="1000" alt="Fig4">
 </p>
 This is a repo of EpiMII. Please read EpiMII [paper](url).
 
