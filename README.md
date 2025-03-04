@@ -152,9 +152,9 @@ HVFEENLIGLIGFGG
 2. Each epitope will generate four designed epitope sequences and four sequence recoveries.
 3. Average sequence recovery will be calculated and plotted, as shown in _example_output_ folder.
 ## Available sources:
-* The dataset (pt files) used in EpiMII paper can be downloaded from []. If you want to retrain the model, please put all pt files in this directory _./training/training_data/pdb/pt_.
-* The MODELLER-modeled 3D structures of 142934 MHC-II epitopes (pdb files) used in EpiMII paper can be downloaded from [].
-* All model weights can be downloaded from []. In the EpiMII paper, 'epoch50_step47050.pt' is used as the final model weight '128_earlystop.pt'.
+* The dataset (pt files) used in EpiMII paper can be downloaded from [10.5281/zenodo.14767257]. If you want to retrain the model, please put all pt files in this directory _./training/training_data/pdb/pt_.
+* The MODELLER-modeled 3D structures of 142934 MHC-II epitopes (pdb files) used in EpiMII paper can be downloaded from [10.5281/zenodo.14767257].
+* All model weights can be downloaded from [10.5281/zenodo.14767257]. In the EpiMII paper, 'epoch50_step47050.pt' is used as the final model weight '128_earlystop.pt'.
 * 133 3D structures obtained by X-ray crystallography of MHC-II epitopes collected from PDB can be found in the directory _./dataset/3D_crystalized_all.tar.gz_.
 * Original csv file that contains around 480,000 MHC-II epitopes' sequences collected from IEDB can be found in the directory _./dataset/list_no_cluster.zip_.
    
