@@ -3,7 +3,7 @@
 <p align="center">
 <img width="1000" src="https://github.com/JIY106/EpiMII/blob/main/figures/Figure%204.png">
 </p>
-This is a repo of EpiMII. Please read [EpiMII](https://spj.science.org/doi/full/10.34133/research.1311).
+This is a repo of EpiMII. Please refer to our publication: [EpiMII](https://spj.science.org/doi/full/10.34133/research.1311).
 
 ## Quick guide
 1. Set up conda environment:
